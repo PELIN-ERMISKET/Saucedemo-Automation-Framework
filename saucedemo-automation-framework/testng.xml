@@ -1,0 +1,59 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo Test Suite" parallel="false" thread-count="1">
+
+    <test name="All Tests">
+        <classes>
+
+            <class name="tests.CartFunctionalityTest"/>
+            <class name="tests.CartSingleItemRemoveTest"/>
+
+            <class name="tests.CheckoutFirstNameNumericInputTest"/>
+            <class name="tests.CheckoutLastNameSpecialCharsTest"/>
+            <class name="tests.CheckoutOverviewPriceTaxTest"/>
+            <class name="tests.CheckoutPostalCodeFormatTest"/>
+            <class name="tests.CheckoutRequiredFieldsTest"/>
+            <class name="tests.CheckoutTest"/>
+
+            <class name="tests.CrossUserCartIsolationTest"/>
+            <class name="tests.EmptyCartCheckoutTest"/>
+
+            <class name="tests.EndToEndCheckoutTestPerformanceGlitchUser"/>
+            <class name="tests.EndToEndCheckoutTestProblemUser"/>
+            <class name="tests.EndToEndCheckoutTestStandardUser"/>
+            <class name="tests.EndToEndCheckoutTestVisualUser"/>
+            <class name="tests.EndToEndErrorUserTest"/>
+
+            <class name="tests.LoginErrorMessageIconTest"/>
+            <class name="tests.LoginPasswordCaseSensitivityTest"/>
+
+            <class name="tests.LoginTest"/>
+            <class name="tests.LoginTestEmptyPassword"/>
+            <class name="tests.LoginTestEmptyUsername"/>
+            <class name="tests.LoginTestEmptyUsernameAndPassword"/>
+            <class name="tests.LoginTestErrorUser"/>
+            <class name="tests.LoginTestInvalidPassword"/>
+            <class name="tests.LoginTestInvalidUsername"/>
+            <class name="tests.LoginTestLockedOutUser"/>
+            <class name="tests.LoginTestPerformanceUser"/>
+            <class name="tests.LoginTestVisualUser"/>
+
+            <class name="tests.LoginTrimPasswordSpacesTest"/>
+            <class name="tests.LoginTrimUsernameAndPasswordSpacesTest"/>
+            <class name="tests.LoginTrimUsernameSpacesTest"/>
+            <class name="tests.LoginWithEnterKeyTest"/>
+
+            <class name="tests.LogoutTest"/>
+
+            <class name="tests.MenuResetAppStateTest"/>
+            <class name="tests.ProblemUserImageTest"/>
+            <class name="tests.ProductDetailVerificationTest"/>
+            <class name="tests.ProductImageConsistencyTest"/>
+            <class name="tests.ProductPriceConsistencyTest"/>
+            <class name="tests.ProductSortingTest"/>
+            <class name="tests.VisualUserPriceConsistencyTest"/>
+
+        </classes>
+    </test>
+
+</suite>
+
