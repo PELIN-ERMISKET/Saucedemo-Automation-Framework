@@ -5,9 +5,16 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
+import utilities.Waits;
+
+import java.time.Duration;
 
 @Epic("Checkout Module")
 @Feature("End-to-End checkout flow")
@@ -30,7 +37,6 @@ public class EndToEndCheckoutTestVisualUser extends BaseTest {
                 "Login başarısız! Products sayfası görüntülenmedi."
         );
 
-        // List price visual_user için manipüle edilmiş olabilir — rapora düşsün
         String listPrice = productsPage.getFirstProductPriceOnList();
         System.out.println("Visual_user için liste fiyatı: " + listPrice);
 
@@ -49,6 +55,7 @@ public class EndToEndCheckoutTestVisualUser extends BaseTest {
         infoPage.enterLastName("Ermisket");
         infoPage.enterPostalCode("34000");
         infoPage.clickContinueButton();
+        Waits.pauseSeconds(2);
 
         CheckoutOverviewPage overviewPage = new CheckoutOverviewPage();
         Assert.assertTrue(
@@ -61,12 +68,26 @@ public class EndToEndCheckoutTestVisualUser extends BaseTest {
 
         overviewPage.clickFinishButton();
 
-        CheckoutCompletePage completePage = new CheckoutCompletePage();
+        Waits.pauseSeconds(2);
+
+
+        boolean isSuccessVisible;
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            WebElement completeHeader = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.className("complete-header"))
+            );
+            isSuccessVisible = completeHeader.isDisplayed();
+        } catch (Exception e) {
+            isSuccessVisible = false; // element bulunamazsa test FAIL olacak
+        }
+
         Assert.assertTrue(
-                completePage.isSuccessMessageDisplayed(),
-                "Sipariş başarıyla tamamlanamadı!"
+                isSuccessVisible,
+                "Sipariş başarıyla tamamlanamadı! (complete-header bulunamadı)"
         );
 
+        CheckoutCompletePage completePage = new CheckoutCompletePage();
         completePage.clickBackHomeButton();
         Assert.assertTrue(
                 productsPage.isProductsPageDisplayed(),

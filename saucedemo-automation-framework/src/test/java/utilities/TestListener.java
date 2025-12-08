@@ -4,6 +4,7 @@ import base.Driver;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.NoSuchSessionException;
@@ -12,6 +13,7 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,10 +23,17 @@ public class TestListener implements ITestListener {
     private static final ExtentReports extent = ExtentManager.getExtentReports();
     private static final ThreadLocal<ExtentTest> testThread = new ThreadLocal<>();
 
+    private String getTestName(ITestResult result) {
+        return result.getMethod().getMethodName();
+    }
+
     @Override
     public void onTestStart(ITestResult result) {
-        ExtentTest test = extent.createTest(result.getMethod().getMethodName());
+        String name = getTestName(result);
+        ExtentTest test = extent.createTest(name);
         testThread.set(test);
+
+        test.log(Status.INFO, "Test started: " + name);
     }
 
     @Override
@@ -34,12 +43,18 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
+        String methodName = getTestName(result);
         ExtentTest test = testThread.get();
+
         test.log(Status.FAIL, "Test failed: " + result.getThrowable());
 
         try {
-            String screenshotPath = takeScreenshot(result.getMethod().getMethodName());
+
+            String screenshotPath = takeScreenshot(methodName);
             test.addScreenCaptureFromPath(screenshotPath);
+
+
+            attachScreenshotToAllure("Failure Screenshot - " + methodName);
         }
         catch (NoSuchSessionException e) {
             test.log(Status.WARNING, "Screenshot alınamadı: Browser session kapanmış.");
@@ -73,7 +88,6 @@ public class TestListener implements ITestListener {
         }
 
         File src = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.FILE);
-
         File dest = new File(fullPath);
 
         try {
@@ -83,5 +97,13 @@ public class TestListener implements ITestListener {
         }
 
         return fullPath;
+    }
+
+    private void attachScreenshotToAllure(String name) {
+        if (Driver.getDriver() == null) {
+            return;
+        }
+        byte[] bytes = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+        Allure.addAttachment(name, new ByteArrayInputStream(bytes));
     }
 }

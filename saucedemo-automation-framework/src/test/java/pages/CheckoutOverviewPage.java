@@ -3,6 +3,12 @@ package pages;
 import base.Driver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CheckoutOverviewPage {
 
@@ -12,20 +18,28 @@ public class CheckoutOverviewPage {
     private By finishButton = By.id("finish");
     private By overviewContainer = By.id("checkout_summary_container");
 
-    public String getTotalPrice(){
+    public String getTotalPrice() {
         return driver.findElement(totalPrice).getText();
     }
 
-    public void clickFinish(){
+    public void clickFinish() {
         driver.findElement(finishButton).click();
     }
 
     public void clickFinishButton() {
-        driver.findElement(finishButton).click();
+        clickFinish();
     }
 
     public boolean isOverviewPageDisplayed() {
-        return driver.findElement(overviewContainer).isDisplayed();
-    }
+        try {
 
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(overviewContainer));
+
+            return driver.findElement(overviewContainer).isDisplayed();
+        } catch (TimeoutException | NoSuchElementException e) {
+
+            return false;
+        }
+    }
 }
