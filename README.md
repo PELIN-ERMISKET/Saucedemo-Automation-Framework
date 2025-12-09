@@ -119,6 +119,7 @@ This will generate and open the latest Allure report in your default browser.
 A sample test execution recording is shown below.  
 This GIF demonstrates the full checkout flow using the Visual User scenario.
 
-![Checkout Test Video](saucedemo-automation-framework/test-recordings/TestRecording_checkout-MP4.mp4)
+![Checkout GIF](test-recordings/TestRecording-checkout-GIF.gif)
+
 
 
