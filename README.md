@@ -114,6 +114,12 @@ copy code
 ```run-allure.bat```
 This will generate and open the latest Allure report in your default browser.
 
+## 📊 Allure Report (Full Screenshots)
+
+You can view the full Allure report screenshots here:  
+➡ [Allure Report Screenshots](allure-report-screenshots/)
+
+
 ## 🎥 Test Execution GIF (Checkout Flow)
 
 A sample test execution recording is shown below.  
