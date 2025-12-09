@@ -72,59 +72,53 @@ Screenshot from a sample test run:
 To view the live report locally: http://127.0.0.1:62089/#
 
 bash
-Kodu kopyala
-allure serve target/allure-results
-🛠 Installation
+copy code
+```allure serve target/allure-results```
+
+## 🛠 Installation
 
 
 1️⃣ Clone the project
-bash
-Kodu kopyala
-git clone https://github.com/PELIN-ERMISKET/Saucedemo-Automation-Framework.git
-cd Saucedemo-Automation-Framework/saucedemo-automation-framework
 
+git clone https://github.com/PELIN-ERMISKET/Saucedemo-Automation-Framework.git
+
+```cd Saucedemo-Automation-Framework/saucedemo-automation-framework```
 
 2️⃣ Install dependencies
-Maven will automatically download all required dependencies on the first run:
 
-bash
-Kodu kopyala
-mvn clean test -DskipTests
-▶ Running Tests
-Default suite
-Runs the standard TestNG suite:
+```Maven will automatically download all required dependencies on the first run.```
 
-bash
-Kodu kopyala
-mvn clean test
-Parallel execution (if you add a parallel suite)
-bash
-Kodu kopyala
-mvn clean test -DsuiteXmlFile=testng-parallel.xml
+▶️ Running Tests
+
+Run the full default test suite:
+
+```mvn clean test```
+
+
+Run tests in parallel mode:
+
+```mvn clean test -DsuiteXmlFile=testng-parallel.xml```
 
 ## 📊 Allure Reporting
 Generate & open Allure report (CLI)
+
 bash
-Kodu kopyala
-allure serve target/allure-results
+copy code
+```allure serve target/allure-results```
 Or via helper .bat file
 From the project root:
 
 
 bash
-Kodu kopyala
-run-allure.bat
+copy code
+```run-allure.bat```
 This will generate and open the latest Allure report in your default browser.
 
-## 🎥 Video Recording
-Each test run can be recorded automatically using Monte Screen Recorder.
+## 🎥 Test Execution GIF (Checkout Flow)
 
-Sample recordings are stored under:
-### 🎥 Checkout Success GIF
-![Checkout GIF](TestRecording_checkout-GIF.gif)
+A sample test execution recording is shown below.  
+This GIF demonstrates the full checkout flow using the Visual User scenario.
+
+![Checkout Test Video](saucedemo-automation-framework/test-recordings/TestRecording_checkout-MP4.mp4)
 
 
-bash
-Kodu kopyala
-test-recordings/
-You can attach these videos to defects or share them with the team for easier debugging.
