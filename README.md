@@ -127,6 +127,18 @@ This GIF demonstrates the full checkout flow using the Visual User scenario.
 
 [Checkout Test Video](saucedemo-automation-framework/test-recordings/TestRecording_checkout-MP4.mp4)
 
+## 📊 Test Case Documentation Preview
+
+The image below shows the PNG preview of the full test case documentation.
+You can download the complete Excel file using the link below:
+
+➡️ Download Test Cases Excel File
+
+<p align="center"> <img src="saucedemo-automation-framework-Test-Cases.png" width="1000"/> </p>
+
+📄 [Test Case Documentation Preview](saucedemo-automation-framework-Test-Cases.png)
+
+
 
 
 
